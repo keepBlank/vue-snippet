@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CompositionAPI中的computed</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script>
+        // const app = Vue.createApp({
+        //     setup() {
+        //         const { ref, computed } = Vue;
+        //         const count = ref(0);
+        //         const handleClick = () => {
+        //             count.value += 1
+        //         }
+        //         const countAddFive = computed(() => {
+        //             return count.value + 5
+        //         })
+        //         return { count, handleClick,countAddFive }
+        //     },
+        //     template: `
+        //         <div>
+        //           <div @click="handleClick">cout: {{ count }}</div>    
+        //           <div @click="handleClick">计算属性: {{ countAddFive }}</div>    
+        //         </div>
+        //     `
+        // })
+
+        // const app = Vue.createApp({
+        //     setup() {
+        //         const { ref, computed } = Vue;
+        //         const count = ref(0);
+        //         const handleClick = () => {
+        //             count.value += 1
+        //         }
+        //         let countAddFive = computed({
+        //             get: () => {
+        //                 return count.value + 5
+        //             },
+        //             set: () => {
+        //                 count.value = 10
+        //             }
+        //         })
+        //         setTimeout(() => {
+        //             countAddFive.value = 100
+        //         }, 2000);
+        //         return { count, handleClick, countAddFive }
+        //     },
+        //     template: `
+        //         <div>
+        //           <div @click="handleClick">cout: {{ count }}</div>    
+        //           <div @click="handleClick">计算属性: {{ countAddFive }}</div>    
+        //         </div>
+        //     `
+        // })
+        
+        // const app = Vue.createApp({
+        //     setup() {
+        //         const { ref, computed } = Vue;
+        //         const count = ref(0);
+        //         const handleClick = () => {
+        //             count.value += 1
+        //         }
+        //         let countAddFive = computed({
+        //             get: () => {
+        //                 return count.value + 5
+        //             },
+        //             set: (param) => {
+        //                 count.value = param - 5
+        //             }
+        //         })
+        //         setTimeout(() => {
+        //             countAddFive.value = 100
+        //         }, 2000);
+        //         return { count, handleClick, countAddFive }
+        //     },
+        //     template: `
+        //         <div>
+        //           <div @click="handleClick">cout: {{ count }}</div>    
+        //           <div @click="handleClick">计算属性: {{ countAddFive }}</div>    
+        //         </div>
+        //     `
+        // })
+        const app = Vue.createApp({
+            setup() {
+                const { reactive, computed } = Vue;
+                const countObj = reactive({count: 0});
+                const handleClick = () => {
+                    countObj.count += 1
+                    console.log( countObj.count);
+                }
+                let countAddFive = computed({
+                    get: () => {
+                        return countObj.count + 5
+                    },
+                    set: (param) => {
+                        countObj.count = param - 5
+                    }
+                })
+                setTimeout(() => {
+                    countAddFive.value = 100
+                }, 2000);
+                return { countObj, handleClick, countAddFive }
+            },
+            template: `
+                <div>
+                  <div @click="handleClick">cout:{{ countObj.count }}</div>    
+                  <div>计算属性: {{ countAddFive }}</div>    
+                </div>
+            `
+        })
+
+        const vm = app.mount('#root')
+    </script>
+</body>
+
+</html>

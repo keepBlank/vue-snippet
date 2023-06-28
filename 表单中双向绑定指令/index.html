@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单中双向绑定指令</title>
+
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script>
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             message: 'hello'
+        //         }
+        //     },
+        //     template: `
+        //     <div>
+        //         {{message}}
+        //        <input v-model="message"/>
+        //     </div>
+        // `
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             message: 'hello'
+        //         }
+        //     },
+        //     template: `
+        //     <div>
+        //         {{message}}
+        //        <textarea v-model="message"/>
+        //     </div>
+        // `
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             message: []
+        //         }
+        //     },
+        //     template: `
+        //     <div>
+        //         {{message}}
+        //         Jack<input type="checkbox" v-model="message" value="Jack"/>
+        //         Tom<input type="checkbox" v-model="message" value="Tom"/>
+        //         Susan<input type="checkbox" v-model="message" value="Susan"/>
+        //     </div>
+        // `
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             message: ""
+        //         }
+        //     },
+        //     template: `
+        //     <div>
+        //         {{message}}
+        //         Jack<input type="radio" v-model="message" value="Jack"/>
+        //         Tom<input type="radio" v-model="message" value="Tom"/>
+        //         Susan<input type="radio" v-model="message" value="Susan"/>
+        //     </div>
+        // `
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             message: ""
+        //         }
+        //     },
+        //     template: `
+        //     <div>
+        //         {{message}}
+        //         <select v-model="message">
+        //             <option disabled value="">请选择内容</option>
+        //             <option value="A">A</option>
+        //             <option value="B">B</option>
+        //             <option value="C">C</option>
+        //         </select>
+        //     </div>
+        // `
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             message: []
+        //         }
+        //     },
+        //     template: `
+        //     <div>
+        //         {{message}}
+        //         <select v-model="message" multiple>
+        //             <option disabled value="">请选择内容</option>
+        //             <option value="A">A</option>
+        //             <option value="B">B</option>
+        //             <option value="C">C</option>
+        //         </select>
+        //     </div>
+        // `
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             message: [],
+        //             options:[
+        //                 {
+        //                   text:'A',value:{value:'A'},
+        //                 },
+        //                 {
+        //                   text:'B',value:{value:'B'},
+        //                 },
+        //                 {
+        //                   text:'C',value:{value:'C'},
+        //                 },
+        //             ]
+        //         }
+        //     },
+        //     template: `
+        //     <div>
+        //         {{message}}
+        //         <select v-model="message" multiple>
+        //             <option v-for="item in options" :value="item.value">{{item.text}}</option>
+        //         </select>
+        //     </div>
+        // `
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             message: 'world',
+        //         }
+        //     },
+        //     template: `
+        //     <div>
+        //         {{message}}
+        //         <input type="checkbox" v-model="message" true-value="hello" false-value="world"/>
+        //     </div>
+        // `
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             message: 'world',
+        //         }
+        //     },
+        //     template: `
+        //     <div>
+        //         {{message}}
+        //         <input  v-model.lazy="message"/>
+        //     </div>
+        // `
+        // })
+        // const vm = app.mount('#root')
+
+        const app = Vue.createApp({
+            data() {
+                return {
+                    message: 'world',
+                }
+            },
+            template: `
+            <div>
+                {{message}}
+                <input  v-model="message"/>
+            </div>
+        `
+        })
+        const vm = app.mount('#root')
+    </script>
+</body>
+
+</html>

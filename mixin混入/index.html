@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mixin混入</title>
+
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script>
+        //局部mixin
+        //     const myMixin = {
+        //         data() {
+        //             return {
+        //                 number: 2,
+        //                 count: 333
+        //             }
+        //         },
+        //         created() {
+        //             console.log('mixin created');
+        //         },
+        //         handleClick() {
+        //             console.log('mixin click');
+        //         }
+        //     }
+        //     const app = Vue.createApp({
+        //         data() {
+        //             return {
+        //                 number: 1,
+        //             }
+        //         },
+        //         created() {
+        //             console.log('根组件 created');
+        //         },
+        //         mixins: [myMixin],
+        //         methods: {
+        //             handleClick() {
+        //                 console.log('根组件 click');
+        //             }
+        //         },
+        //         template: `
+        //     <div>
+        //         <div>{{number}}</div>
+        //         <child/>
+        //         <button @click="handleClick">增加</button>
+        //     </div>
+        // `
+        //     })
+        //     app.component('child', {
+        //         mixins: [myMixin],
+        //         template: `<div>{{count}}</div>`
+        //     })
+
+        //     const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             number: 1,
+        //         }
+        //     },
+        //     created() {
+        //         console.log('根组件 created');
+        //     },
+        //     methods: {
+        //         handleClick() {
+        //             console.log('根组件 click');
+        //         }
+        //     },
+        //     template: `
+        //     <div>
+        //         <div>{{number}}</div>
+        //         <child/>
+        //         <button @click="handleClick">增加</button>
+        //     </div>
+        // `
+        // })
+        // // 全局的mixin
+        // app.mixin({
+        //     data() {
+        //         return {
+        //             number: 2,
+        //             count: 333
+        //         }
+        //     },
+        //     created() {
+        //         console.log('mixin created');
+        //     },
+        //     handleClick() {
+        //         console.log('mixin click');
+        //     }
+        // })
+
+        // app.component('child', {
+        //     template: `<div>{{count}}</div>`
+        // })
+
+
+        const myMixin = {number: 2}
+        
+        const app = Vue.createApp({
+            number:1,
+            mixins:[myMixin],
+            template: `
+                <div>
+                    <div>{{this.$options.number}}</div> 
+                </div>
+            `
+        })
+        // 对自定义属性number的合并策略做出修改
+        app.config.optionMergeStrategies.number = (mixinVal,appVal) => {
+            return mixinVal || appVal
+        }
+        const vm = app.mount('#root')
+    </script>
+</body>
+
+</html>

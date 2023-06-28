@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据校验的插件</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script>
+        // const app = Vue.createApp({
+        //     data(){
+        //         return {
+        //             name: 'LeBrow James',
+        //             age: 28
+        //         }
+        //     },
+        //     // 如果年龄不大于25就执行warn中的警告信息
+        //     rules:{
+        //         age:{
+        //             validate: age => age > 25,
+        //             warn: 'too young ,too simple!'
+        //         },
+        //         name:{
+        //             validate: name => name.length >=4,
+        //             warn: 'name too short!'
+        //         }
+        //     },
+        //     template: `
+        //         <div>
+        //             name:{{name}} 
+
+        //             age: {{age}}
+        //         </div>
+        //     `
+        // })
+
+
+
+        // app.mixin({
+        //     created(){
+        //         for(let key in this.$options.rules){
+        //             const item = this.$options.rules[key]
+        //             this.$watch(key,(value)=>{
+        //                 const result = item.validate(value)
+        //                 if(!result){
+        //                     alert(item.warn)
+        //                 }
+        //             })
+        //         }
+        //     }
+        // })
+
+        const app = Vue.createApp({
+            data() {
+                return {
+                    name: 'LeBrow James',
+                    age: 28
+                }
+            },
+            // 如果年龄不大于25就执行warn中的警告信息
+            rules: {
+                age: {
+                    validate: age => age > 25,
+                    warn: 'too young ,too simple!'
+                },
+                name: {
+                    validate: name => name.length >= 4,
+                    warn: 'name too short!'
+                }
+            },
+            template: `
+                <div>
+                    name:{{name}} 
+
+                    age: {{age}}
+                </div>
+            `
+        })
+
+        const validatorPlugin = (app, options) => {
+            app.mixin({
+                created() {
+                    for (let key in this.$options.rules) {
+                        const item = this.$options.rules[key]
+                        this.$watch(key, (value) => {
+                            const result = item.validate(value)
+                            if (!result) {
+                                alert(item.warn)
+                            }
+                        })
+                    }
+                }
+            })
+        }
+        
+        app.use(validatorPlugin)
+        const vm = app.mount('#root')
+    </script>
+</body>
+
+</html>

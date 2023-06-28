@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>样式绑定</title>
+    <style>
+        .red{
+            color: red;
+        }
+        .green{
+            color: green;
+        }
+        .brown{
+            color: brown;
+        }
+    </style>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script>
+    // const app = Vue.createApp({
+    //     data() {
+    //         return {
+    //             message: 'hello world',
+    //             classString: 'red',
+    //         }
+    //     },
+    //     template: `
+    //         <div :class="classString">{{message}}</div>
+    //     `
+    // })
+    // const vm = app.mount('#root')
+
+    // const app = Vue.createApp({
+    //     data() {
+    //         return {
+    //             message: 'hello world',
+    //             classObject: {red: true,green: true},
+    //         }
+    //     },
+    //     template: `
+    //         <div :class="classString">{{message}}</div>
+    //     `
+    // })
+    // const vm = app.mount('#root')
+
+    // const app = Vue.createApp({
+    //     data() {
+    //         return {
+    //             message: 'hello world',
+    //             classArray: ['red','green']
+    //         }
+    //     },
+    //     template: `
+    //         <div :class="classArray">{{message}}</div>
+    //     `
+    // })
+    // const vm = app.mount('#root')
+
+    // const app = Vue.createApp({
+    //     data() {
+    //         return {
+    //             classString: 'red',
+    //             message: 'hello world',
+    //             classArray: ['red','green',{brown: true}]
+    //         }
+    //     },
+    //     template: `
+    //         <div :class="classString">
+    //             {{message}}
+    //             <child class="green" />
+    //         </div>
+    //     `
+    // })
+    // app.component('child',{
+    //     template: `<div>我是子组件</div>`
+    // })
+    // const vm = app.mount('#root')
+
+    // const app = Vue.createApp({
+    //     data() {
+    //         return {
+    //             classString: 'red',
+    //             message: 'hello world',
+    //             classArray: ['red','green',{brown: true}]
+    //         }
+    //     },
+    //     template: `
+    //         <div :class="classString">
+    //             {{message}}
+    //             <child class="green" />
+    //         </div>
+    //     `
+    // })
+    // app.component('child',{
+    //     template: `
+    //       <div :class="$attrs.class">节点1</div>
+    //       <div>节点2</div>
+    //     `
+    // })
+    // const vm = app.mount('#root')
+
+    // const app = Vue.createApp({
+    //     data() {
+    //         return {
+    //             classString: 'red',
+    //             message: 'hello world',
+    //             classArray: ['red','green',{brown: true}],
+    //             styleString: 'color: yellow'
+    //         }
+    //     },
+    //     template: `
+    //         <div :style="styleString">
+    //             {{message}}
+    //         </div>
+    //     `
+    // })
+    // const vm = app.mount('#root')
+
+    
+    const app = Vue.createApp({
+        data() {
+            return {
+                classString: 'red',
+                message: 'hello world',
+                classArray: ['red','green',{brown: true}],
+                styleString: 'color: yellow',
+                styleObject: {
+                    color: 'orange'
+                }
+            }
+        },
+        template: `
+            <div :style="styleObject">
+                {{message}}
+            </div>
+        `
+    })
+    const vm = app.mount('#root')
+    </script>
+</body>
+
+</html>

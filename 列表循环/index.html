@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表循环</title>
+
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script>
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //          listArray: ['feng','wang','singer'],
+        //          listObject:{
+        //             firstName: 'feng',
+        //             lastName: 'wang',
+        //             job: 'singer'
+        //          }
+        //         }
+        //     },
+        //     template: `
+        //         <div>
+        //             <div v-for="(item,index) in listArray">{{item}} -- {{index}}</div>
+        //             <div v-for="(value,key,index) in listObject">{{value}} -- {{key}} -- {{index}}</div>
+        //         </div>
+        //     `
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //          listArray: ['feng','wang','singer'],
+        //         }
+        //     },
+        //     methods:{
+        //         handleAddBtnClick() {
+        //             // this.listArray.push('hello world')
+        //             // this.listArray.pop()
+        //             // this.listArray.shift()
+        //             this.listArray.unshift('hello')
+        //         }
+        //     },
+        //     template: `
+        //         <div>
+        //             <div v-for="(item,index) in listArray" :key="index">{{item}} -- {{index}}</div>
+        //             <button @click="handleAddBtnClick">新增</button>
+        //         </div>
+        //     `
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //          listArray: ['feng','wang','singer'],
+        //         }
+        //     },
+        //     methods:{
+        //         handleAddBtnClick() {
+        //             // this.listArray = ['bye','world']
+        //             // this.listArray = ['bye','world'].concat(['666'])
+        //             this.listArray = ['bye','world'].filter(item => item === 'bye')
+        //         }
+        //     },
+        //     template: `
+        //         <div>
+        //             <div v-for="(item,index) in listArray" :key="index">{{item}} -- {{index}}</div>
+        //             <button @click="handleAddBtnClick">新增</button>
+        //         </div>
+        //     `
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //          listArray: ['feng','wang','singer'],
+        //         }
+        //     },
+        //     methods:{
+        //         handleAddBtnClick() {
+        //             this.listArray[1] = 'li'
+        //         }
+        //     },
+        //     template: `
+        //         <div>
+        //             <div v-for="(item,index) in listArray" :key="index">{{item}} -- {{index}}</div>
+        //             <button @click="handleAddBtnClick">新增</button>
+        //         </div>
+        //     `
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             listObject: {
+        //                 firstName: 'feng',
+        //                 lastName: 'wang',
+        //                 job: 'singer'
+        //             }
+        //         }
+        //     },
+        //     methods: {
+        //         handleAddBtnClick() {
+        //             this.listObject.gender= '男'
+        //             this.listObject.age= 18
+        //         }
+        //     },
+        //     template: `
+        //     <div>
+        //         <div v-for="(value,key,index) in listObject" :key="index">{{value}} -- {{key}}</div>
+        //         <button @click="handleAddBtnClick">新增</button>
+        //     </div>
+        // `
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             listObject: {
+        //                 firstName: 'feng',
+        //                 lastName: 'wang',
+        //                 job: 'singer'
+        //             }
+        //         }
+        //     },
+        //     methods: {
+        //         handleAddBtnClick() {
+        //             this.listObject.gender= '男'
+        //             this.listObject.age= 18
+        //         }
+        //     },
+        //     template: `
+        //     <div>
+        //         <div v-for="(value,key,index) in listObject" :key="index">{{value}} -- {{key}}</div>
+        //         <div v-for="item in 10" >{{item}}</div>
+        //         <button @click="handleAddBtnClick">新增</button>
+        //     </div>
+        // `
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             listObject: {
+        //                 firstName: 'feng',
+        //                 lastName: 'wang',
+        //                 job: 'singer'
+        //             }
+        //         }
+        //     },
+        //     template: `
+        //     <div>
+        //         <div 
+        //           v-for="(value,key,index) in listObject" 
+        //           :key="index"
+        //           v-if="key !== 'lastName'"
+        //         >
+        //           {{value}} -- {{key}}
+        //         </div>
+        //     </div>
+        // `
+        // })
+        // const vm = app.mount('#root')
+
+        const app = Vue.createApp({
+            data() {
+                return {
+                    listObject: {
+                        firstName: 'feng',
+                        lastName: 'wang',
+                        job: 'singer'
+                    }
+                }
+            },
+            template: `
+            <div>
+                <template
+                  v-for="(value,key,index) in listObject" 
+                  :key="index"
+                >
+                <div  v-if="key !== 'lastName'">  
+                  {{value}} -- {{key}}
+                </div>
+                </template>
+            </div>
+        `
+        })
+        const vm = app.mount('#root')
+    </script>
+</body>
+
+</html>

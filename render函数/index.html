@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>render函数</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script>
+        // const app = Vue.createApp({
+        //     template: `
+        //         <my-title :level="2">
+        //             Hello World!
+        //         </my-title>
+        //     `
+        // })
+
+        // app.component('my-title', {
+        //     props:['level'],
+        //     template: `
+        //       <h1 v-if="level === 1"><slot /></h1>
+        //       <h2 v-if="level === 2"><slot /></h2>
+        //       <h3 v-if="level === 3"><slot /></h3>
+        //     `
+        // })
+
+
+        // const app = Vue.createApp({
+        //     template: `
+        //         <my-title :level="1">
+        //             Hello World!
+        //         </my-title>
+        //     `
+        // })
+
+        // app.component('my-title', {
+        //     props:['level'],
+        //     render(){
+        //         const { h } = Vue
+        //         return h('h' + this.level,{},this.$slots.default())
+        //     }
+        // })
+        
+        const app = Vue.createApp({
+            template: `
+                <my-title :level="1">
+                    Hello World!
+                </my-title>
+            `
+        })
+
+        app.component('my-title', {
+            props:['level'],
+            render(){
+                const { h } = Vue
+                return h('h' + this.level,{},[
+                    this.$slots.default(),
+                    h('h3',{},'我是嵌套在h1标签中的h3标签中的内容')
+                ])
+            }
+        })
+
+        const vm = app.mount('#root')
+    </script>
+</body>
+
+</html>

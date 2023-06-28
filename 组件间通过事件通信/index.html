@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件间通过事件通信</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script>
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             count: 1
+        //         }
+        //     },
+        //     methods:{
+        //         handleAddOne() {
+        //             this.count += 1
+        //         }
+        //     },
+        //     template:`
+        //     <div>
+        //         <counter :count="count" @add-one="handleAddOne"/>
+        //     </div>
+        //     `
+        // })
+        // app.component('counter',{
+        //     props:["count"],
+        //     methods:{
+        //         handleClick() {
+        //             this.$emit('addOne')
+        //         }
+        //     },
+        //     template:`
+        //       <div @click="handleClick">{{count}}</div>
+        //     `
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             count: 1
+        //         }
+        //     },
+        //     methods:{
+        //         handleAdd(param) {
+        //             this.count += param
+        //         }
+        //     },
+        //     template:`
+        //     <div>
+        //         <counter :count="count" @add="handleAdd"/>
+        //     </div>
+        //     `
+        // })
+        // app.component('counter',{
+        //     props:["count"],
+        //     methods:{
+        //         handleClick() {
+        //             this.$emit('add',2)
+        //         }
+        //     },
+        //     template:`
+        //       <div @click="handleClick">{{count}}</div>
+        //     `
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             count: 1
+        //         }
+        //     },
+        //     methods:{
+        //         handleAdd(newCount) {
+        //             this.count = newCount
+        //         }
+        //     },
+        //     template:`
+        //     <div>
+        //         <counter :count="count" @add="handleAdd"/>
+        //     </div>
+        //     `
+        // })
+        // app.component('counter',{
+        //     props:["count"],
+        //     emits: {
+        //         add: (count) => {
+        //             if(count < 0) {
+        //                 return true
+        //             }
+        //             return false
+        //         }
+        //     },
+        //     methods:{
+        //         handleClick() {
+        //             this.$emit('add',this.count + 2)
+        //         }
+        //     },
+        //     template:`
+        //       <div @click="handleClick">{{count}}</div>
+        //     `
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             count: 1,
+        //         }
+        //     },
+        //     methods:{
+        //         handleAdd(newCount) {
+        //             this.count = newCount
+        //         }
+        //     },
+        //     template:`
+        //     <div>
+        //         <counter v-model="count"/>
+        //     </div>
+        //     `
+        // })
+        // app.component('counter',{
+        //     props:['modelValue'],
+        //     methods:{
+        //         handleClick() {
+        //             this.$emit('update:modelValue',this.modelValue + 2)
+        //         }
+        //     },
+        //     template:`
+        //       <div @click="handleClick">{{modelValue}}</div>
+        //     `
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             count: 1,
+        //         }
+        //     },
+        //     methods:{
+        //         handleAdd(newCount) {
+        //             this.count = newCount
+        //         }
+        //     },
+        //     template:`
+        //     <div>
+        //         <counter v-model:app="count"/>
+        //     </div>
+        //     `
+        // })
+        // app.component('counter',{
+        //     props:['app'],
+        //     methods:{
+        //         handleClick() {
+        //             this.$emit('update:app',this.app + 2)
+        //         }
+        //     },
+        //     template:`
+        //       <div @click="handleClick">{{app}}</div>
+        //     `
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             count: 1,
+        //             count1: 1
+        //         }
+        //     },
+        //     methods:{
+        //         handleAdd(newCount) {
+        //             this.count = newCount
+        //         }
+        //     },
+        //     template:`
+        //     <div>
+        //         <counter v-model:count="count" v-model:count1="count1"/>
+        //     </div>
+        //     `
+        // })
+        // app.component('counter',{
+        //     props:['count','count1'],
+        //     methods:{
+        //         handleClick() {
+        //             this.$emit('update:count',this.count + 2)
+        //         },
+        //         handleClick1() {
+        //             this.$emit('update:count1',this.count1 + 2)
+        //         }
+        //     },
+        //     template:`
+        //       <div @click="handleClick">{{count}}</div>
+        //       <div @click="handleClick1">{{count1}}</div>
+        //     `
+        // })
+        // const vm = app.mount('#root')
+
+        const app = Vue.createApp({
+            data() {
+                return {
+                    count: 'a',
+                }
+            },
+            template:`
+            <div>
+                <counter v-model.toUpperCase="count"/>
+            </div>
+            `
+        })
+        app.component('counter',{
+            props:{
+                'modelValue': String,
+                'modelModifiers': {
+                    default: () => ({})
+                }
+            },
+            mounted(){
+                console.log(this.modelModifiers);
+            },
+            methods:{
+                handleClick() {
+                    let newValue = this.modelValue + 'b'
+                    if(this.modelModifiers.toUpperCase){
+                        newValue = newValue.toUpperCase()
+                    }
+                    this.$emit('update:modelValue',newValue)
+                }
+            },
+            template:`
+              <div @click="handleClick">{{modelValue}}</div>
+            `
+        })
+        const vm = app.mount('#root')
+    </script>
+</body>
+
+</html>

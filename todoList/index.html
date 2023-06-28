@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todoList</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script>
+        // 创建Vue的实例
+        Vue.createApp({
+            // 定义数据
+            data() {
+                return {
+                    list:[],
+                    inputValue:"",
+                }
+            },
+            // 定义方法
+            methods: {
+                handleAddItem() {
+                    this.list.push(this.inputValue)
+                    // 清空输入框内容
+                    this.inputValue = ""
+                }
+            },
+            // 定义页面显示内容
+            template: `
+                <div>
+                  <input v-model="inputValue"/>
+                  <button v-on:click="handleAddItem">增加</button>
+                  <ul>
+                    <li v-for="(item,index) of list">{{item}}</li>
+                  </ul>
+                </div>
+            `
+        }).mount('#root')
+    </script>
+</body>
+
+</html>

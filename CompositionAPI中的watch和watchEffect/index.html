@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CompositionAPI中的watch和watchEffect</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script>
+        // const app = Vue.createApp({
+        //     setup() {
+        //         const { ref,watch } = Vue;
+        //         const name = ref('LeBrown')
+        //         watch(name,(currentVal,preVal) => {
+        //             console.log(currentVal,preVal);
+        //         })
+        //         return {name}
+        //     },
+        //     template: `
+        //         <div>
+        //           <div>
+        //             Name: <input v-model="name"/>
+        //           </div>
+        //           <div>
+        //             Name is: {{name}}
+        //           </div>
+        //         </div>
+        //     `
+        // })
+
+        // const app = Vue.createApp({
+        //     setup() {
+        //         const { reactive,watch,toRefs} = Vue;
+        //         const nameObj = reactive({name:'LeBrown'})
+        //         watch(()=> nameObj.name,(currentVal,preVal) => {
+        //             console.log(currentVal,preVal);
+        //         })
+        //         const {name} = toRefs(nameObj)
+        //         return {name}
+        //     },
+        //     template: `
+        //         <div>
+        //           <div>
+        //             Name: <input v-model="name"/>
+        //           </div>
+        //           <div>
+        //             Name is: {{name}}
+        //           </div>
+        //         </div>
+        //     `
+        // })
+
+        // const app = Vue.createApp({
+        //     setup() {
+        //         const { reactive,watch,toRefs} = Vue;
+        //         const nameObj = reactive({name:'LeBrown',englishname:'James'})
+        //         watch([()=> nameObj.name,()=> nameObj.englishname],([curName,curEng],[prevName,prevEng]) => {
+        //             console.log(curName,curEng);
+        //             console.log(prevName,prevEng);
+        //         })
+        //         const {name,englishname} = toRefs(nameObj)
+        //         return {name,englishname}
+        //     },
+        //     template: `
+        //         <div>
+        //           <div>
+        //             Name: <input v-model="name"/>
+        //           </div>
+        //           <div>
+        //             Name is: {{name}}
+        //           </div>
+        //           <div>
+        //             EnglishName: <input v-model="englishname"/>
+        //           </div>
+        //           <div>
+        //             Name is: {{englishname}}
+        //           </div>
+        //         </div>
+        //     `
+        // })
+
+        // const app = Vue.createApp({
+        //     setup() {
+        //         const { reactive,  watchEffect, toRefs } = Vue;
+        //         const nameObj = reactive({ name: 'LeBrown', englishname: 'James' })
+               
+        //         watchEffect(()=>{
+        //             console.log(nameObj.name);
+        //             console.log(nameObj.englishname);
+        //         })
+
+        //         const { name, englishname } = toRefs(nameObj)
+
+        //         return { name, englishname }
+        //     },
+        //     template: `
+        //         <div>
+        //           <div>
+        //             Name: <input v-model="name"/>
+        //           </div>
+        //           <div>
+        //             Name is: {{name}}
+        //           </div>
+        //           <div>
+        //             EnglishName: <input v-model="englishname"/>
+        //           </div>
+        //           <div>
+        //             Name is: {{englishname}}
+        //           </div>
+        //         </div>
+        //     `
+        // })
+        
+        // const app = Vue.createApp({
+        //     setup() {
+        //         const { reactive,  watchEffect, toRefs } = Vue;
+        //         const nameObj = reactive({ name: 'LeBrown', englishname: 'James' })
+               
+        //         const stop = watchEffect(()=>{
+        //             console.log(nameObj.name);
+        //             console.log(nameObj.englishname);
+        //             setTimeout(() => {
+        //                 // 取消侦听器
+        //                 stop()
+        //             }, 3000);
+        //         })
+
+        //         const { name, englishname } = toRefs(nameObj)
+
+        //         return { name, englishname }
+        //     },
+        //     template: `
+        //         <div>
+        //           <div>
+        //             Name: <input v-model="name"/>
+        //           </div>
+        //           <div>
+        //             Name is: {{name}}
+        //           </div>
+        //           <div>
+        //             EnglishName: <input v-model="englishname"/>
+        //           </div>
+        //           <div>
+        //             Name is: {{englishname}}
+        //           </div>
+        //         </div>
+        //     `
+        // })
+
+         const app = Vue.createApp({
+            setup() {
+                const { reactive,watch,toRefs} = Vue;
+                const nameObj = reactive({name:'LeBrown',englishname:'James'})
+                watch([()=> nameObj.name,()=> nameObj.englishname],([curName,curEng],[prevName,prevEng]) => {
+                    console.log(curName,curEng);
+                    console.log(prevName,prevEng);
+                },{immediate: true})
+                const {name,englishname} = toRefs(nameObj)
+                return {name,englishname}
+            },
+            template: `
+                <div>
+                  <div>
+                    Name: <input v-model="name"/>
+                  </div>
+                  <div>
+                    Name is: {{name}}
+                  </div>
+                  <div>
+                    EnglishName: <input v-model="englishname"/>
+                  </div>
+                  <div>
+                    Name is: {{englishname}}
+                  </div>
+                </div>
+            `
+        })
+
+
+        const vm = app.mount('#root')
+    </script>
+</body>
+
+</html>

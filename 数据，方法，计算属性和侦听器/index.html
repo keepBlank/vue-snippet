@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据，方法，计算属性和侦听器</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script>
+    // const app = Vue.createApp({
+    //     data() {
+    //         return {
+    //             message: 'hello world',
+    //         }
+    //     },
+    //     methods:{
+    //         formatString(string) {
+    //             return string.toUpperCase()
+    //         }
+    //     },
+    //     template: `
+    //         <div @click="handleClick">{{formatString(message)}}</div>
+    //     `
+    // })
+    // const vm = app.mount('#root')
+
+    // const app = Vue.createApp({
+    //     data() {
+    //         return {
+    //             message: 'hello world',
+    //             count: 2,
+    //             price: 5,
+    //             // 相当于在这声明了total
+    //         }
+    //     },
+    //     computed:{
+    //             total() {
+    //                 return this.price * this.count
+    //             }
+    //     },
+    //     template: `
+    //         <div>{{total}}</div>
+    //     `
+    // })
+    // const vm = app.mount('#root')
+
+    // const app = Vue.createApp({
+    //     data() {
+    //         return {
+    //             message: 'hello world',
+    //             count: 2,
+    //             price: 5,
+    //         }
+    //     },
+    //     computed:{
+    //             total() {
+    //                 return this.price * this.count
+    //             }
+    //     },
+    //     methods:{
+    //         getTotal() {
+    //             return this.price * this.count
+    //         }
+    //     },
+    //     template: `
+    //         <div>{{getTotal()}}</div>
+    //     `
+    // })
+    // const vm = app.mount('#root')
+
+    // const app = Vue.createApp({
+    //     data() {
+    //         return {
+    //             message: 'hello world',
+    //             count: 2,
+    //             price: 5,
+    //         }
+    //     },
+    //     computed:{
+    //             total() {
+    //                 return Date.now() + this.count
+    //             }
+    //     },
+    //     methods:{
+    //         getTotal() {
+    //             return Date.now() + this.count
+    //         }
+    //     },
+    //     template: `
+    //         <div>{{message}} --- {{total}}</div>
+    //     `
+    // })
+    // const vm = app.mount('#root')
+
+    // const app = Vue.createApp({
+    //     data() {
+    //         return {
+    //             message: 'hello world',
+    //             count: 2,
+    //             price: 5,
+    //         }
+    //     },
+    //     computed:{
+    //             total() {
+    //                 return Date.now() + this.count
+    //             }
+    //     },
+    //     methods:{
+    //         getTotal() {
+    //             return Date.now() + this.count
+    //         }
+    //     },
+    //     template: `
+    //         <div>{{message}} --- {{getTotal()}}</div>
+    //     `
+    // })
+    // const vm = app.mount('#root')
+
+    // const app = Vue.createApp({
+    //     data() {
+    //         return {
+    //             message: 'hello world',
+    //             count: 2,
+    //             price: 5,
+    //         }
+    //     },
+    //     watch:{
+    //         price() {
+    //             setTimeout(() => {
+    //                 console.log('data中的price发生了变化');
+    //             }, 2000);
+    //         }
+    //     },
+    //     computed:{
+    //             total() {
+    //                 return Date.now() + this.count
+    //             }
+    //     },
+    //     methods:{
+    //         getTotal() {
+    //             return Date.now() + this.count
+    //         }
+    //     },
+    //     template: `
+    //         <div>{{message}} --- {{getTotal()}}</div>
+    //     `
+    // })
+    // const vm = app.mount('#root')
+
+    const app = Vue.createApp({
+        data() {
+            return {
+                message: 'hello world',
+                count: 2,
+                price: 5,
+                newTotal: 10
+            }
+        },
+        watch:{
+            price(current,prev) {
+                this.newTotal = current * this.count
+            }
+        },
+        computed:{
+                total() {
+                    return Date.now() + this.count
+                }
+        },
+        methods:{
+            getTotal() {
+                return Date.now() + this.count
+            }
+        },
+        template: `
+            <div>{{message}} --- {{newTotal}}</div>
+        `
+    })
+    const vm = app.mount('#root')
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件绑定</title>
+
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script>
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             counter: 0
+        //         }
+        //     },
+        //     methods: {
+        //         handleBtnClick(event) {
+        //            this.counter += 1
+        //            console.log(event);
+        //         }
+        //     },
+        //     template: `
+        //     <div>
+        //         {{counter}}
+        //        <button @click = "handleBtnClick">按钮</button>
+        //     </div>
+        // `
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             counter: 0
+        //         }
+        //     },
+        //     methods: {
+        //         handleBtnClick(step,event) {
+        //            this.counter += step
+        //            console.log(event);
+        //         }
+        //     },
+        //     template: `
+        //     <div>
+        //         {{counter}}
+        //        <button @click = "handleBtnClick(2,$event)">按钮</button>
+        //     </div>
+        // `
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             counter: 0
+        //         }
+        //     },
+        //     methods: {
+        //         handleBtnClick1() {
+        //             alert("1")
+        //         },
+        //         handleBtnClick2() {
+        //             alert("2")
+        //         }
+        //     },
+        //     template: `
+        //     <div>
+        //         {{counter}}
+        //        <button @click = "handleBtnClick1(),handleBtnClick2()">按钮</button>
+        //     </div>
+        // `
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             counter: 0
+        //         }
+        //     },
+        //     methods: {
+        //         handleDivClick() {
+        //             alert("div click")
+        //         },
+        //         handleBtnClick() {
+        //             this.counter += 1
+        //         }
+        //     },
+        //     template: `
+        //     <div @click="handleDivClick">
+        //         {{counter}}
+        //        <button @click.stop = "handleBtnClick">按钮</button>
+        //     </div>
+        // `
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             counter: 0
+        //         }
+        //     },
+        //     methods: {
+        //         handleDivClick() {
+        //             alert("div click")
+        //         },
+        //         handleBtnClick() {
+        //             this.counter += 1
+        //         }
+        //     },
+        //     template: `
+        //     <div @click.self="handleDivClick">
+        //         {{counter}}
+        //        <button @click = "handleBtnClick">按钮</button>
+        //     </div>
+        // `
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             counter: 0
+        //         }
+        //     },
+        //     methods: {
+        //         handleKeyDown() {
+        //             console.log("div click")
+        //         }
+        //     },
+        //     template: `
+        //     <div>
+        //         <input @keydown.enter="handleKeyDown"/>
+        //     </div>
+        // `
+        // })
+        // const vm = app.mount('#root')
+
+        const app = Vue.createApp({
+            data() {
+                return {
+                    counter: 0
+                }
+            },
+            methods: {
+                handleClick() {
+                    console.log("div click")
+                }
+            },
+            template: `
+            <div>
+                <div @click.ctrl.exact="handleClick">123</div>
+            </div>
+        `
+        })
+        const vm = app.mount('#root')
+    </script>
+</body>
+
+</html>

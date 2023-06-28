@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ref，reactive 响应式引用的用法和原理</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script>
+        // const app = Vue.createApp({
+        //     template: `
+        //         <div>{{name}}</div>
+        //     `,
+        //     setup(props, context) {
+        //         let { ref } = Vue;
+        //         // 'LeBrown'变成proxy({value: 'LeBrown'})这样的一个响应式引用
+        //         let name = ref('LeBrown')
+        //         setTimeout(() => {
+        //             name.value = 'James'
+        //         }, 2000);
+        //         return {
+        //             name
+        //         }
+        //     }
+        // })
+
+        // const app = Vue.createApp({
+        //     template: `
+        //         <div>{{nameObj.name}}</div>
+        //     `,
+        //     setup(props, context) {
+        //         const { reactive } = Vue;
+        //         // { name: 'LeBrown' } 变成 proxy({ name: 'LeBrown' })这样的一个响应式引用
+        //         let nameObj = reactive({ name: 'LeBrown' })
+        //         setTimeout(() => {
+        //             nameObj.name = 'James'
+        //         }, 2000);
+        //         return {
+        //             nameObj
+        //         }
+        //     }
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     template: `
+        //         <div>{{nameObj[0]}}</div>
+        //     `,
+        //     setup(props, context) {
+        //         const { reactive } = Vue;
+        //         let nameObj = reactive([123])
+        //         setTimeout(() => {
+        //             nameObj[0] = 456
+        //         }, 2000);
+        //         return {
+        //             nameObj
+        //         }
+        //     }
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     template: `
+        //         <div>
+        //             {{nameObj[0]}}
+
+        //         </div>
+        //     `,
+        //     setup(props, context) {
+        //         const { reactive,readonly } = Vue;
+        //         let nameObj = reactive([123])
+        //         const copyNameObj = readonly(nameObj)
+        //         setTimeout(() => {
+        //             nameObj[0] = 456
+        //             copyNameObj[0] = 456
+        //         }, 2000);
+        //         return {
+        //             nameObj,
+        //             copyNameObj
+        //         }
+        //     }
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     template: `
+        //         <div>{{name}}</div>
+        //     `,
+        //     setup(props, context) {
+        //         const { reactive,toRefs } = Vue;
+        //         let nameObj = reactive({ name: 'LeBrown' })
+        //         setTimeout(() => {
+        //             nameObj.name = 'James'
+        //         }, 2000);
+        //         const {name} = toRefs(nameObj)
+        //         return {
+        //             name
+        //         }
+        //     }
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     template: `
+        //         <div>{{name}}</div>
+        //     `,
+        //     setup(props, context) {
+        //         const { reactive,toRefs } = Vue;
+        //         const  data = reactive({ name: 'LeBrown' })
+        //         // 解构出来  toRefs将proxy({value: 'LeBrown'}) 变成 {name: proxy({{value: 'LeBrown'}})}
+        //         const {name} = toRefs(data)
+        //         setTimeout(() => {
+        //             name.value = 'James'
+        //         }, 2000);
+        //         return {name}
+        //     }
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     template: `
+        //         <div>{{age}}</div>
+        //     `,
+        //     setup(props, context) {
+        //         const { reactive,toRefs } = Vue;
+        //         const  data = reactive({ name: 'LeBrown' })
+        //         // 解构出来  toRefs将proxy({value: 'LeBrown'}) 变成 {name: proxy({{value: 'LeBrown'}})}
+        //         const {age} = toRefs(data)
+        //         setTimeout(() => {
+        //             age.value = 'James'
+        //         }, 2000);
+        //         return {age}
+        //     }
+        // })
+        // const vm = app.mount('#root')
+
+        const app = Vue.createApp({
+            template: `
+                <div>{{age}}</div>
+            `,
+            setup(props, context) {
+                const { reactive,toRef } = Vue;
+                const  data = reactive({ name: 'LeBrown' })
+                const age = toRef(data,"age")
+                setTimeout(() => {
+                    age.value = 'James'
+                }, 2000);
+                return {age}
+            }
+        })
+        const vm = app.mount('#root')
+    </script>
+</body>
+
+</html>

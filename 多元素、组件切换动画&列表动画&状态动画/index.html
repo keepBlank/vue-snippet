@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多元素、组件切换动画&列表动画&状态动画</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        /* .v-enter-from,
+        .v-leave-to {
+            opacity: 0;
+        }
+
+        .v-enter-active,
+        .v-leave-active {
+            transition: opacity 1s ease-in;
+        }
+
+        .v-enter-to,
+        .v-leave-from {
+            opacity: 1;
+        }
+
+        .list-item{
+            display: inline-block;
+            margin-right: 10px;
+        } */
+
+        .v-enter-from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .v-enter-active {
+            transition: all 1s ease-in;
+        }
+
+        .v-enter-to {
+            opacity: 1;
+            transform: translateY(0px);
+        }
+
+        .v-move {
+            transition: all 1s;
+        }
+
+        .list-item {
+            display: inline-block;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script>
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             show: true
+        //         }
+        //     },
+        //     methods: {
+        //         handleClick() {
+        //             this.show  = !this.show
+        //         },
+        //     },
+        //     template: `
+        //     <div>
+        //         <transition mode="out-in" appear>
+        //             <div v-if="show">hello world</div>
+        //             <div v-else="show">bye world</div>
+        //         </transition>
+        //         <button @click="handleClick">切换</button>
+        //     </div>
+        //     `
+        // })
+        // const ComponentA = {
+        //     template: `<div>hello world</div>`
+        // }
+        // const ComponentB = {
+        //     template: `<div>Bye world</div>`
+        // }
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             show: true
+        //         }
+        //     },
+        //     methods: {
+        //         handleClick() {
+        //             this.show = !this.show
+        //         },
+        //     },
+        //     components: {
+        //         "component-a": ComponentA,
+        //         "component-b": ComponentB
+        //     },
+        //     template: `
+        //     <div>
+        //         <transition mode="out-in" appear>
+        //             <component-a v-if="show"/>
+        //             <component-b v-else="show"/>
+        //         </transition>
+        //         <button @click="handleClick">切换</button>
+        //     </div>
+        //     `
+        // })
+
+        // const ComponentA = {
+        //     template: `<div>hello world</div>`
+        // }
+        // const ComponentB = {
+        //     template: `<div>Bye world</div>`
+        // }
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             component: 'component-a'
+        //         }
+        //     },
+        //     methods: {
+        //         handleClick() {
+        //             if(this.component === 'component-a'){
+        //                 this.component = 'component-b'
+        //             }else{
+        //                 this.component = 'component-a'
+        //             }
+        //         },
+        //     },
+        //     components: {
+        //         "component-a": ComponentA,
+        //         "component-b": ComponentB
+        //     },
+        //     template: `
+        //     <div>
+        //         <transition mode="out-in" appear>
+        //             <component :is="component"/>
+        //         </transition>
+        //         <button @click="handleClick">切换</button>
+        //     </div>
+        //     `
+        // })
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             list: [1,2,3]
+        //         }
+        //     },
+        //     methods: {
+        //         handleClick() {
+        //             this.list.unshift(this.list.length + 1)
+        //         },
+        //     },
+        //     template: `
+        //     <div>
+        //         <transition-group>
+        //             <span class="list-item" v-for="item in list" :key="item">{{item}}</span>
+        //         </transition-group>
+        //         <button @click="handleClick">添加</button>
+        //     </div>
+        //     `
+        // })
+        const app = Vue.createApp({
+            data() {
+                return {
+                    number: 1,
+                    animateNumber: 1
+                }
+            },
+            methods: {
+                handleClick() {
+                    this.number = 10
+                    if (this.animateNumber < this.number) {
+                        const animation = setInterval(() => {
+                            this.animateNumber += 1
+                            if (this.animateNumber === this.number) {
+                                clearInterval(animation)
+                            }
+                        }, 100);
+                    }
+                },
+            },
+            template: `
+            <div>
+                <div>{{animateNumber}}</div>
+                <button @click="handleClick">增加</button>
+            </div>
+            `
+        })
+        const vm = app.mount('#root')
+    </script>
+</body>
+
+</html>

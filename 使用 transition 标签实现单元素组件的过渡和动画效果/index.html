@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用 transition 标签实现单元素组件的过渡和动画效果</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        /* .v-enter-from{
+            opacity: 0;
+        }
+        .v-enter-active{
+            transition: opacity 2s ease-in-out;
+        }
+        .v-enter-to{
+            opacity: 1;
+        }
+        .v-leave-from{
+            opacity: 1;
+        }
+        .v-leave-active{
+            transition: opacity 2s ease-in-out;
+        }
+        .v-leave-to{
+            opacity: 0;
+        } */
+
+        /* @keyframes shake{
+            0% {
+                transform: translateX(-100px);
+            }
+            50% {
+                transform: translateX(-50px);
+            }
+            100%{
+                transform: translateX(50px);
+            }
+        }
+        .v-enter-active{
+            animation: shake 3s;
+        }
+        .v-leave-active{
+            animation: shake 3s;
+        } */
+
+        /* @keyframes shake{
+            0% {
+                transform: translateX(-100px);
+            }
+            50% {
+                transform: translateX(-50px);
+            }
+            100%{
+                transform: translateX(50px);
+            }
+        }
+        .hello-enter-active{
+            animation: shake 3s;
+        }
+        .hello-leave-active{
+            animation: shake 3s;
+        } */
+
+        /* @keyframes shake {
+            0% {
+                transform: translateX(-100px);
+            }
+
+            50% {
+                transform: translateX(-50px);
+            }
+
+            100% {
+                transform: translateX(50px);
+            }
+        }
+
+        .hello {
+            animation: shake 3s;
+        }
+
+        .bye {
+            animation: shake 3s;
+        } */
+
+        /* @keyframes shake{
+            0% {
+                transform: translateX(-100px);
+            }
+            50% {
+                transform: translateX(-50px);
+            }
+            100%{
+                transform: translateX(50px); 
+            }
+        }
+        .v-enter-from{
+            color: red;
+        }
+        .v-enter-active{
+            animation: shake 3s;
+            transition: all 3s ease-in;
+        }
+        .v-enter-to{
+            color: green;
+        }
+        .v-leave-from{
+            color: green;
+        }
+        .v-leave-active{
+            animation: shake 3s;
+            transition: all 3s ease-out;
+        } 
+        .v-leave-to{
+            color: red;
+        } */
+
+        @keyframes shake{
+            0% {
+                transform: translateX(-100px);
+            }
+            50% {
+                transform: translateX(-50px);
+            }
+            100%{
+                transform: translateX(50px); 
+            }
+        }
+        .v-enter-from{
+            color: red;
+        }
+        .v-enter-active{
+            animation: shake 3s;
+            transition: all 10s ease-in;
+        }
+        .v-enter-to{
+            color: green;
+        }
+        .v-leave-from{
+            color: green;
+        }
+        .v-leave-active{
+            animation: shake 3s;
+            transition: all 10s ease-out;
+        } 
+        .v-leave-to{
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script>
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             show: false
+        //         }
+        //     },
+        //     methods: {
+        //         handleClick() {
+        //           this.show = !this.show
+        //         }
+        //     },
+        //     template: `
+        //     <div>
+        //         <transition>
+        //             <div v-if="show">hello world</div>
+        //         </transition>
+        //         <button @click="handleClick">切换</button>
+        //     </div>
+        //     `
+        // })
+
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             show: false
+        //         }
+        //     },
+        //     methods: {
+        //         handleClick() {
+        //           this.show = !this.show
+        //         }
+        //     },
+        //     template: `
+        //     <div>
+        //         <transition name="hello">
+        //             <div v-if="show">hello world</div>
+        //         </transition>
+        //         <button @click="handleClick">切换</button>
+        //     </div>
+        //     `
+        // })
+
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             show: false
+        //         }
+        //     },
+        //     methods: {
+        //         handleClick() {
+        //             this.show = !this.show
+        //         }
+        //     },
+        //     template: `
+        //     <div>
+        //         <transition 
+        //           enter-active-class="hello"
+        //           leave-active-class="bye"
+        //         >
+        //             <div v-if="show">hello world</div>
+        //         </transition>
+        //         <button @click="handleClick">切换</button>
+        //     </div>
+        //     `
+        // })
+
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             show: false
+        //         }
+        //     },
+        //     methods: {
+        //         handleClick() {
+        //             this.show = !this.show
+        //         }
+        //     },
+        //     template: `
+        //     <div>
+        //         <transition 
+        //           enter-active-class="animate__animated animate__bounce"
+        //           leave-active-class="animate__animated animate__bounce"
+        //         >
+        //             <div v-if="show">hello world</div>
+        //         </transition>
+        //         <button @click="handleClick">切换</button>
+        //     </div>
+        //     `
+        // })
+
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             show: false
+        //         }
+        //     },
+        //     methods: {
+        //         handleClick() {
+        //             this.show = !this.show
+        //         }
+        //     },
+        //     template: `
+        //     <div>
+        //         <transition type="animation">
+        //             <div v-if="show">hello world</div>
+        //         </transition>
+        //         <button @click="handleClick">切换</button>
+        //     </div>
+        //     `
+        // })
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             show: false
+        //         }
+        //     },
+        //     methods: {
+        //         handleClick() {
+        //             this.show = !this.show
+        //         }
+        //     },
+        //     template: `
+        //     <div>
+        //         <transition :duration="1000">
+        //             <div v-if="show">hello world</div>
+        //         </transition>
+        //         <button @click="handleClick">切换</button>
+        //     </div>
+        //     `
+        // })
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             show: false
+        //         }
+        //     },
+        //     methods: {
+        //         handleClick() {
+        //             this.show = !this.show
+        //         }
+        //     },
+        //     template: `
+        //     <div>
+        //         <transition :duration="{enter: 1000,leave: 3000}">
+        //             <div v-if="show">hello world</div>
+        //         </transition>
+        //         <button @click="handleClick">切换</button>
+        //     </div>
+        //     `
+        // })
+
+        const app = Vue.createApp({
+            data() {
+                return {
+                    show: false
+                }
+            },
+            methods: {
+                handleClick() {
+                    this.show = !this.show
+                },
+                handleBeforeEnter(el){
+                    el.style.color = 'red'
+                },
+                handleEnterActive(el,done){
+                    const animation = setInterval(() => {
+                        const color = el.style.color
+                        if(color === 'red'){
+                            el.style.color = 'green'
+                        }else{
+                            el.style.color = 'red'
+                        }
+                    }, 1000);
+                    setTimeout(() => {
+                       clearInterval(animation)
+                       done()
+                    }, 3000);
+                }
+
+            },
+            template: `
+            <div>
+                <transition 
+                  :css = "false"
+                  @before-enter = "handleBeforeEnter"
+                  @enter = "handleEnterActive"
+                  @after-enter = "handleEnterEnd"
+                >
+                    <div v-if="show">hello world</div>
+                </transition>
+                <button @click="handleClick">切换</button>
+            </div>
+            `
+        })
+
+        const vm = app.mount('#root')
+    </script>
+</body>
+
+</html>

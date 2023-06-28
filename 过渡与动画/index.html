@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>过渡与动画</title>
+    <style>
+        /* @keyframes leftToRight {
+            0% {
+                transform: translateX(-100px);
+            }
+            50% {
+                transform: translateX(-50px);
+            }
+            100% {
+                transform: translateX(0px);
+            }
+        }
+        .animation{
+            animation: leftToRight 2s linear;
+        } */
+
+        .transition {
+            transition: 3s background-color ease;
+        }
+
+        .blue {
+            background: blue;
+        }
+
+        .green {
+            background: green;
+        }
+    </style>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script>
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //             animate: {
+        //                 animation: false
+        //             }
+        //         }
+        //     },
+        //     methods: {
+        //         handleClick() {
+        //             this.animate.animation = !this.animate.animation
+        //         }
+        //     },
+        //     template: `
+        // <div>
+        //     <div :class="animate">hello world</div>
+        //     <button @click="handleClick">切换</button>
+        // </div>
+        // `
+        // })
+
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     data() {
+        //         return {
+        //            animate: {
+        //             transition: true,
+        //             blue: true,
+        //             green: false
+        //            }
+        //         }
+        //     },
+        //     methods:{
+        //         handleClick() {
+        //             this.animate.blue = !this.animate.blue
+        //             this.animate.green = !this.animate.green
+        //         }
+        //     },
+        //     template: `
+        //     <div>
+        //         <div :class="animate">hello world</div>
+        //         <button @click="handleClick">切换</button>
+        //     </div>
+        //     `
+        // })
+
+        // const vm = app.mount('#root')
+
+        const app = Vue.createApp({
+            data() {
+                return {
+                    styleObj: {
+                        background: 'blue'
+                    }
+                }
+            },
+            methods: {
+                handleClick() {
+                    if (this.styleObj.background === 'blue') {
+                        this.styleObj.background = 'green'
+                    } else {
+                        this.styleObj.background = 'blue'
+                    }
+                }
+            },
+            template: `
+            <div>
+                <div class="transition" :style="styleObj">hello world</div>
+                <button @click="handleClick">切换</button>
+            </div>
+            `
+        })
+
+        const vm = app.mount('#root')
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup函数的使用</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script>
+        // const app = Vue.createApp({
+        //     template: `
+        //         <div @click="handleClick">
+        //             {{name}} 
+        //         </div>
+        //     `,
+        //     methods:{
+        //         test(){
+        //             console.log(this.$options.setup());
+        //         }
+        //     },
+        //     mounted() {
+        //         this.test()
+        //     },
+        //     setup(props, context) {
+        //         return {
+        //             name: 'LeBrow James',
+        //             handleClick() {
+        //                 alert(123)
+        //             }
+        //         }
+
+        //     }
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     template: `
+        //         <child app="app"></child>
+        //     `,
+        // })
+        // app.component('child', {
+        //     template: `
+        //         <div>
+        //             child
+        //         </div>
+        //     `,
+        //     setup(props, context) {
+        //         const {attrs,slots,emit} = context
+        //         console.log(attrs.app);
+        //         return {}
+        //     }
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     methods:{
+        //         listenChange(){
+        //             alert('change')
+        //         }
+        //     },
+        //     template: `
+        //         <child @change="listenChange">parent</child>
+        //     `,
+        // })
+        // app.component('child', {
+        //     mounted(){
+        //         this.$emit('change')
+        //     },
+        //     setup(props, context) {
+        //         const { h } = Vue;
+        //         const { attrs, slots, emit } = context
+        //         return () => h('div', {}, slots.default())
+        //     }
+        // })
+        // const vm = app.mount('#root')
+
+        const app = Vue.createApp({
+            methods:{
+                listenChange(){
+                    alert('change')
+                }
+            },
+            template: `
+                <child @change="listenChange">parent</child>
+            `,
+        })
+        app.component('child', {
+            template: `
+                <div @click=handleClick>child</div>
+            `,
+            setup(props, context) {
+                const { h } = Vue;
+                const { attrs, slots, emit } = context
+                function handleClick(){
+                    emit('change')
+                }
+                return {
+                    handleClick
+                }
+            }
+        })
+        const vm = app.mount('#root')
+    </script>
+</body>
+
+</html>

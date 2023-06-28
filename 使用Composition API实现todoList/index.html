@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用Composition API实现todoList</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script>
+        // const app = Vue.createApp({
+        //     setup(){
+        //         const { ref,reactive } = Vue;
+        //         const inputValue = ref('');
+        //         const list = reactive([]);
+        //         const handleInputChange = (e)=>{
+        //             inputValue.value = e.target.value
+        //         }
+        //         const handleSubmit = ()=>{
+        //             list.push(inputValue.value)
+        //             inputValue.value = ''
+        //         }
+        //         return {
+        //             inputValue,
+        //             handleInputChange,
+        //             handleSubmit,
+        //             list
+        //         }
+        //     },
+        //     template: `
+        //         <input :value="inputValue" @input="handleInputChange"/>
+        //         <button @click="handleSubmit">提交</button>
+        //         <ul>
+        //             <li v-for="(item,index) in list" :key="index">{{item}}</li>
+        //         </ul>
+        //     `
+        // })
+        // const vm = app.mount('#root')
+
+        // 关于inputVal操作的内容进行了封装
+        const inputRelevantEffect = () => {
+            const { ref } = Vue;
+            const inputValue = ref('');
+            const handleInputChange = (e) => {
+                inputValue.value = e.target.value
+            }
+            return {
+                inputValue,
+                handleInputChange
+            }
+        }
+
+        // 关于list操作的内容进行了封装
+        const listRelevantEffect = () => {
+            const { reactive } = Vue;
+            const list = reactive([]);
+            const addItemToList = (item) => {
+                list.push(item)
+            }
+            return { addItemToList, list }
+        }
+
+        const app = Vue.createApp({
+            setup() {
+                // 流程的调度中转
+                const { addItemToList, list } = listRelevantEffect()
+                const { inputValue, handleInputChange } = inputRelevantEffect()
+                return {
+                    addItemToList, list,
+                    inputValue, handleInputChange
+                }
+            },
+            template: `
+                <input :value="inputValue" @input="handleInputChange"/>
+                <button @click="() => addItemToList(inputValue)">提交</button>
+                <ul>
+                    <li v-for="(item,index) in list" :key="index">{{item}}</li>
+                </ul>
+            `
+        })
+        const vm = app.mount('#root')
+    </script>
+</body>
+
+</html>

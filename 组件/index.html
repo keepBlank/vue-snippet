@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件</title>
+
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script>
+        // const app = Vue.createApp({
+        //     template:'<div><hello/><world/><div/>'
+        // })
+        // app.component('hello',{
+        //     template: '<div>hello</div>'
+        // })
+        // app.component('world',{
+        //     template: '<div>world</div>'
+        // })
+        // const vm = app.mount('#root')
+
+        // const app = Vue.createApp({
+        //     template:`
+        //     <div>
+        //         <counter-parent/>
+        //         <counter/>
+        //         <counter/>
+        //         <counter/>
+        //     <div/>
+        //     `
+        // })
+        // app.component('counter-parent',{
+        //     template:`<counter/>`
+        // })
+        // app.component('counter',{
+        //     data(){
+        //         return {
+        //             counter: 0
+        //         }
+        //     },
+        //     template: '<div @click="counter += 1">{{counter}}</div>'
+        // })
+        
+        // const vm = app.mount('#root')
+        // const counter = {
+        //     data(){
+        //         return {
+        //             counter: 0
+        //         }
+        //     },
+        //     template: '<div @click="counter += 1">{{counter}}</div>'
+        // }
+        // const app = Vue.createApp({
+        //     components:{
+        //         counter: counter
+        //     },
+        //     template:`
+        //     <div>
+        //         <counter/>
+        //     </div>
+        //     `
+        // })
+        // const vm = app.mount('#root')
+
+        // const counter = {
+        //     data(){
+        //         return {
+        //             counter: 0
+        //         }
+        //     },
+        //     template: '<div @click="counter += 1">{{counter}}</div>'
+        // }
+        // const app = Vue.createApp({
+        //     components:{
+        //         xxx: counter
+        //     },
+        //     template:`
+        //     <div>
+        //         <xxx/>
+        //     </div>
+        //     `
+        // })
+        // const vm = app.mount('#root')
+
+        const Counter = {
+            data(){
+                return {
+                    counter: 0
+                }
+            },
+            template: '<div @click="counter += 1">{{counter}}</div>'
+        }
+        const HelloWorld = {
+            template:`<div>hello world</div>`
+        }
+        const app = Vue.createApp({
+            components:{ Counter,HelloWorld },
+            template:`
+            <div>
+                <hello-world/>
+                <counter/>
+            </div>
+            `
+        })
+        const vm = app.mount('#root')
+    </script>
+</body>
+
+</html>

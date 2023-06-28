@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello world</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script>
+        // 创建Vue的实例
+        Vue.createApp({
+            data() {
+                // content变量
+                return {
+                    content: 1
+                }
+            },
+            // 自动执行的函数
+            mounted(){
+                setInterval(() => {
+                    this.content += 1                   
+                }, 1000);
+            },
+            // 在root中以template模板作为展示内容
+            template: '<div>{{content}}</div>'
+            // 指定目标元素上使用vue    
+        }).mount('#root')
+    </script>
+</body>
+
+</html>

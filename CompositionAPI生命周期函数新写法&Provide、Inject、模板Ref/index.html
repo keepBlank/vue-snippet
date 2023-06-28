@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CompositionAPI生命周期函数新写法&Provide、Inject、模板Ref</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script>
+    //  const app = Vue.createApp({
+    //     setup() {
+    //       // beforMount => onBeforeMount        当Vue实例即将挂载到页面时自动执行的函数
+    //       // mounted => onMounted               当Vue实例挂载到页面时自动执行的函数
+    //       // beforUpdate => onBeforUpdate       当数据发生变化页面重新渲染前自动执行的函数
+    //       // updated => onUpdated               当数据发生变化后页面重新渲染后自动执行的函数
+    //       // beforeUnmount => onBeforeUnmount   当组件即将从页面上移出的时候自动执行的函数
+    //       // unmounted => onUnmounted           当组件从页面上移出之后自动执行的函数
+
+    //       // onRenderTracked`指的是在收集响应式依赖时自动执行的函数
+    //       // onRenderTrigger 指的是页面重新渲染被触发时自动执行的函数
+    //       const  { ref, onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onRenderTracked, onRenderTriggered} = Vue
+    //       const name = ref('LeBrown')
+    //       const handleClick = () => {
+    //         name.value = "James"
+    //       }
+    //       onBeforeMount(()=>{
+    //         console.log('onBeforeMount');
+    //       })
+    //       onMounted(()=>{
+    //         console.log('onMounted');
+    //       })
+    //       onBeforeUpdate(()=>{
+    //         console.log('onBeforUpdate');
+    //       })
+    //       onUpdated(()=>{
+    //         console.log('onUpdated');
+    //       })
+    //       onRenderTracked(()=>{
+    //         console.log('onRenderTracked');
+    //       })
+    //       onRenderTriggered(()=>{
+    //         console.log('onRenderTriggered');
+    //       })
+    //       return {name,handleClick}
+    //     },
+    //     template: `
+    //         <div @click = "handleClick">
+    //           {{name}}
+    //         </div>
+    //     `
+    // })
+    // const app = Vue.createApp({
+    //   setup() {
+    //     const { provide } = Vue
+    //     provide('name', 'leBrown')
+    //     return {}
+    //   },
+    //   template: `
+    //             <div>
+    //                <child />
+    //             </div>
+    //         `
+    // })
+    // app.component('child', {
+    //   setup() {
+    //     const { inject } = Vue
+    //     const name = inject('name','hello')
+    //     return {name}
+    //   },
+    //   template: `
+    //             <div>
+    //               {{name}}
+    //             </div>
+    //         `
+    // }
+    // )
+
+    // const app = Vue.createApp({
+    //   setup() {
+    //     const { provide, ref, readonly } = Vue
+    //     const name = ref('leBrown')
+    //     // 使用readonly封装后再传给子组件
+    //     provide('name', readonly(name))
+    //     // 修改父组件中的数据并传递方法给子组件
+    //     provide('changeName', (value) => {
+    //       name.value = value
+    //     })
+    //     return {}
+    //   },
+    //   template: `
+    //             <div>
+    //                <child />
+    //             </div>
+    //         `
+    // })
+    // app.component('child', {
+    //   setup() {
+    //     const { inject } = Vue
+    //     const name = inject('name')
+    //     // 子组件接收父组件传递过来的方法
+    //     const changeName = inject('changeName')
+    //     const handleClick = () => {
+    //       // 调用父组件传递过来的方法并传值
+    //       changeName('James')
+    //     }
+    //     return { name, handleClick }
+    //   },
+    //   template: `
+    //             <div @click="handleClick">{{name}}</div>
+    //         `
+    // })
+
+    const app = Vue.createApp({
+      setup() {
+        const { ref, onMounted } = Vue
+        // 定义空的响应式对象hello,这个名字要和模板中引用DOM的ref的名字hello要一样
+        const hello = ref(null)
+        onMounted(() => {
+          console.log(hello.value)
+        })
+        return {hello}
+      },
+      template: `
+                <div>
+                  <div ref="hello">Hello World</div>
+                </div>
+            `
+    })
+   
+
+    const vm = app.mount('#root')
+  </script>
+</body>
+
+</html>
